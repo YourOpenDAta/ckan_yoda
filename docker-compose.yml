@@ -11,7 +11,7 @@ volumes:
 
 services:
   ckan:
-    container_name: ckan_etsit
+    container_name: ckan_yoda
     build:
       context: ./
       dockerfile: ckan_${CKAN_VERSION}/Dockerfile 
@@ -44,13 +44,13 @@ services:
       - ckan_storage:/var/lib/ckan
 
   # datapusher:
-  #   container_name: datapusher_etsit
+  #   container_name: datapusher_yoda
   #   image: clementmouchet/datapusher
   #   ports:
   #     - "8800:8800"
 
   db:
-    container_name: db_etsit
+    container_name: db_yoda
     build:
       context: ./
       dockerfile: postgresql/Dockerfile
@@ -65,7 +65,7 @@ services:
     restart: unless-stopped
 
   solr:
-    container_name: solr_etsit
+    container_name: solr_yoda
     build:
       context: ./
       dockerfile: solr/Dockerfile
@@ -74,6 +74,6 @@ services:
     restart: unless-stopped
 
   redis:
-    container_name: redis_etsit
+    container_name: redis_yoda
     image: redis:6.2
     restart: unless-stopped

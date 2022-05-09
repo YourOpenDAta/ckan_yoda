@@ -2,7 +2,7 @@ version: "3.5"
 services:
   mongo:
     image: mongo:${MONGO_VERSION}
-    container_name: mongo_etsit
+    container_name: mongo_yoda
     command: --nojournal
     restart: always
     ports:
@@ -19,7 +19,7 @@ services:
 
   orion:
     image: fiware/orion-ld:${ORION_VERSION}
-    container_name: orion_etsit
+    container_name: orion_yoda
     restart: always
     depends_on:
       - mongo
@@ -38,7 +38,7 @@ services:
       context: ./draco
       args:
         DRACO_VERSION: ${DRACO_VERSION}
-    container_name: draco_etsit
+    container_name: draco_yoda
     restart: always
     depends_on:
       - orion

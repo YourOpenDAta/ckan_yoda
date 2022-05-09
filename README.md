@@ -1,6 +1,6 @@
-# ckan_etsit
+# ckan_yoda
 
-- [ckan_etsit](#ckan_etsit)
+- [ckan_yoda](#ckan_yoda)
   - [Versions](#versions)
     - [CKAN extensions](#ckan-extensions)
   - [Set-up](#set-up)
@@ -48,14 +48,14 @@ docker-compose --file docker-compose.fiware.yml up -d --build
 ### Create data samples (for testing)
 
 ```
-docker exec -it ckan_etsit /usr/local/bin/ckan -c /etc/ckan/production.ini seed basic
-docker exec -it ckan_etsit /usr/local/bin/ckan -c /etc/ckan/production.ini seed family
-docker exec -it ckan_etsit /usr/local/bin/ckan -c /etc/ckan/production.ini seed gov
-docker exec -it ckan_etsit /usr/local/bin/ckan -c /etc/ckan/production.ini seed hierarchy
-docker exec -it ckan_etsit /usr/local/bin/ckan -c /etc/ckan/production.ini seed search
-docker exec -it ckan_etsit /usr/local/bin/ckan -c /etc/ckan/production.ini seed translations
-docker exec -it ckan_etsit /usr/local/bin/ckan -c /etc/ckan/production.ini seed user
-docker exec -it ckan_etsit /usr/local/bin/ckan -c /etc/ckan/production.ini seed vocabs
+docker exec -it ckan_yoda /usr/local/bin/ckan -c /etc/ckan/production.ini seed basic
+docker exec -it ckan_yoda /usr/local/bin/ckan -c /etc/ckan/production.ini seed family
+docker exec -it ckan_yoda /usr/local/bin/ckan -c /etc/ckan/production.ini seed gov
+docker exec -it ckan_yoda /usr/local/bin/ckan -c /etc/ckan/production.ini seed hierarchy
+docker exec -it ckan_yoda /usr/local/bin/ckan -c /etc/ckan/production.ini seed search
+docker exec -it ckan_yoda /usr/local/bin/ckan -c /etc/ckan/production.ini seed translations
+docker exec -it ckan_yoda /usr/local/bin/ckan -c /etc/ckan/production.ini seed user
+docker exec -it ckan_yoda /usr/local/bin/ckan -c /etc/ckan/production.ini seed vocabs
 ```
 
 ### DRACO templates
@@ -99,20 +99,20 @@ curl -L -X POST 'http://localhost:1026/ngsi-ld/v1/subscriptions/' \
   
   <br/>
 Architecture elements: 
-- Network: ckan_etsit_default
+- Network: ckan_yoda_default
   - CKAN environment
-    - ckan_etsit (*container*)
+    - ckan_yoda (*container*)
       - /var/lib/ckan
       - /usr/lib/ckan
       - /etc/ckan
-    - db_etsit (*container*)
+    - db_yoda (*container*)
       - /var/lib/postgresql/data
-    - redis_etsit (*container*)
+    - redis_yoda (*container*)
       - /data
-    - solr_etsit (*container*)
+    - solr_yoda (*container*)
       - /opt/solr/server/solr/ckan/data
   - FIWARE environment
-    - draco_etsit (*container*)
+    - draco_yoda (*container*)
       - /opt/nifi/nifi-current/state
       - /opt/nifi/nifi-current/conf
       - /opt/nifi/nifi-current/content_repository
@@ -120,8 +120,8 @@ Architecture elements:
       - /opt/nifi/nifi-current/flowfile_repository
       - /opt/nifi/nifi-current/logs
       - /opt/nifi/nifi-current/provenance_repository
-    - orion_etsit (*container*)
-    - mongo_etsit (*container*)
+    - orion_yoda (*container*)
+    - mongo_yoda (*container*)
       - /data/db
       - /data/configdb
 
