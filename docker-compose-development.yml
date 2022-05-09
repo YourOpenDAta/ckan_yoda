@@ -1,0 +1,10 @@
+version: "3.5"
+
+services:
+
+  ckan:
+
+    volumes: 
+
+#      - /home/javier/Escritorio/yoda/ckanext-dcat:/usr/lib/ckan/venv/src/ckanext-dcat
+      - /home/javier/Desktop/temporal/ckanext-dcatapedp:/usr/lib/ckan/venv/src/ckanext-dcatapedp

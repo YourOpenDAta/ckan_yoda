@@ -1,6 +1,9 @@
 #!/bin/bash
 
-source ../template.env
+path=$( cd "$(dirname "${BASH_SOURCE[0]}")" ; pwd -P )
+parent_path=$(dirname $path)
+cd $parent_path
+source ./.env
 
 # Build and start environment
 # list of containers: ckan_etsit, redis_etsit, solr_etsit, db_etsit
@@ -29,12 +32,12 @@ docker exec -it ckan_etsit /usr/local/bin/ckan-paster --plugin=ckan sysadmin -c 
 docker exec -it ckan_etsit /usr/local/bin/ckan-paster --plugin=ckanext-harvest harvester initdb --config=/etc/ckan/production.ini
 
 # update production.ini
-docker exec -it ckan_etsit /usr/local/bin/ckan-paster --plugin=ckan config-tool /etc/ckan/production.ini -s  app:main 'ckan.plugins= stats text_view image_view recline_view datastore dcat dcat_rdf_harvester dcat_json_harvester dcat_json_interface structured_data harvest ckan_harvester' 'ckanext.dcat.rdf.profiles = euro_dcat_ap edp_dcat_ap' 'ckanext.dcat.base_uri = http://example.com' 'ckan.harvest.mq.type = redis'
+docker exec -it ckan_etsit /usr/local/bin/ckan-paster --plugin=ckan config-tool /etc/ckan/production.ini -s  app:main 'ckan.plugins= stats text_view image_view recline_view datastore dcat dcat_rdf_harvester dcat_json_harvester dcat_json_interface structured_data harvest ckan_harvester oaipmh_edp' 'ckanext.dcat.rdf.profiles = euro_dcat_ap edp_dcat_ap' 'ckanext.dcat.base_uri = http://example.com' 'ckan.harvest.mq.type = redis'
 
 
-docker-compose --env-file ../template.env -f ../docker-compose.yml restart ckan
+docker-compose -f ./docker-compose.yml restart ckan
 
-#create test data but it does not save them in the database
+
 # docker exec -it ckan_etsit /usr/local/bin/ckan-paster --plugin=ckan create-test-data -c /etc/ckan/production.ini
 
 

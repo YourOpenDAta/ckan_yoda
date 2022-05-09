@@ -1,23 +1,24 @@
 #!/bin/bash
-
-source ../template.env
+path=$( cd "$(dirname "${BASH_SOURCE[0]}")" ; pwd -P )
+parent_path=$(dirname $path)
+cd $parent_path
+source ./.env
 
 # Build and start environment
-# list of containers: ckan, db, solr, redis, datapusher
-# list of volumes: docker_ckan_config, docker_ckan_home, docker_ckan_storage, docker_pg_data, docker_solr_data
-#docker-compose --env-file ./environment/.env -f ./ckan/contrib/docker/docker-compose.yml up -d --build 
+# list of containers: ckan_etsit, redis_etsit, solr_etsit, db_etsit
+# list of volumes: ckan_etsit_ckan_config, ckan_etsit_ckan_home, ckan_etsit_ckan_storage, ckan_etsit_pg_data, ckan_etsit_solr_data
 
 # Find the path to a named volume
-docker volume inspect docker_ckan_home | jq -c '.[] | .Mountpoint'
+docker volume inspect ckan_etsit_ckan_home | jq -c '.[] | .Mountpoint'
 # "/var/lib/docker/volumes/docker_ckan_config/_data"
 
-export VOL_CKAN_HOME=`docker volume inspect docker_ckan_home | jq -r -c '.[] | .Mountpoint'`
+export VOL_CKAN_HOME=`docker volume inspect ckan_etsit_ckan_home | jq -r -c '.[] | .Mountpoint'`
 echo $VOL_CKAN_HOME
 
-export VOL_CKAN_CONFIG=`docker volume inspect docker_ckan_config | jq -r -c '.[] | .Mountpoint'`
+export VOL_CKAN_CONFIG=`docker volume inspect ckan_etsit_ckan_config | jq -r -c '.[] | .Mountpoint'`
 echo $VOL_CKAN_CONFIG
 
-export VOL_CKAN_STORAGE=`docker volume inspect docker_ckan_storage | jq -r -c '.[] | .Mountpoint'`
+export VOL_CKAN_STORAGE=`docker volume inspect ckan_etsit_ckan_storage | jq -r -c '.[] | .Mountpoint'`
 echo $VOL_CKAN_STORAGE
 
 # configure datastore
@@ -27,13 +28,13 @@ docker exec ckan_etsit /usr/local/bin/ckan -c /etc/ckan/production.ini datastore
 docker exec -it ckan_etsit /usr/local/bin/ckan -c /etc/ckan/production.ini sysadmin add $ADMIN_USER_CKAN email=$ADMIN_USER_CKAN_EMAIL name=$ADMIN_USER_CKAN_NAME password=$ADMIN_USER_CKAN_PASS
 
 # update production.ini
-docker exec -it ckan_etsit /usr/local/bin/ckan config-tool /etc/ckan/production.ini -s  app:main 'ckan.plugins= stats text_view image_view recline_view datastore dcat dcat_rdf_harvester dcat_json_harvester dcat_json_interface structured_data harvest ckan_harvester' 'ckanext.dcat.rdf.profiles = euro_dcat_ap edp_dcat_ap' 'ckanext.dcat.base_uri = http://example.com' 'ckan.harvest.mq.type = redis'
+docker exec -it ckan_etsit /usr/local/bin/ckan config-tool /etc/ckan/production.ini -s  app:main 'ckan.plugins= stats text_view image_view recline_view datastore dcat dcat_rdf_harvester dcat_json_harvester dcat_json_interface structured_data harvest ckan_harvester oaipmh_edp' 'ckanext.dcat.rdf.profiles = euro_dcat_ap edp_dcat_ap' 'ckanext.dcat.base_uri = http://example.com' 'ckan.harvest.mq.type = redis'
 
 # configure ckanext-harvest extension
 docker exec -it ckan_etsit /usr/local/bin/ckan -c /etc/ckan/production.ini harvester initdb
 
 
-docker-compose --env-file ../template.env -f ../docker-compose.yml restart ckan
+docker-compose -f ./docker-compose.yml restart ckan
 
 #create test data but it does not save them in the database
 # docker exec -it ckan_etsit /usr/local/bin/ckan -c /etc/ckan/production.ini seed basic

@@ -1,0 +1,732 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<template encoding-version="1.3">
+    <description></description>
+    <groupId>ef00fa37-0177-1000-b9ec-1283784ea3f2</groupId>
+    <name>DCAT flow CKAN</name>
+    <snippet>
+        <connections>
+            <id>db7e3354-ec81-3393-0000-000000000000</id>
+            <parentGroupId>ad13454d-8fb5-3cf4-0000-000000000000</parentGroupId>
+            <backPressureDataSizeThreshold>1 GB</backPressureDataSizeThreshold>
+            <backPressureObjectThreshold>10000</backPressureObjectThreshold>
+            <destination>
+                <groupId>ad13454d-8fb5-3cf4-0000-000000000000</groupId>
+                <id>d44cdb8b-3f3f-3d25-0000-000000000000</id>
+                <type>PROCESSOR</type>
+            </destination>
+            <flowFileExpiration>0 sec</flowFileExpiration>
+            <labelIndex>1</labelIndex>
+            <loadBalanceCompression>DO_NOT_COMPRESS</loadBalanceCompression>
+            <loadBalancePartitionAttribute></loadBalancePartitionAttribute>
+            <loadBalanceStatus>LOAD_BALANCE_NOT_CONFIGURED</loadBalanceStatus>
+            <loadBalanceStrategy>DO_NOT_LOAD_BALANCE</loadBalanceStrategy>
+            <name></name>
+            <selectedRelationships>Success</selectedRelationships>
+            <source>
+                <groupId>ad13454d-8fb5-3cf4-0000-000000000000</groupId>
+                <id>2ffceb4e-7893-3cee-0000-000000000000</id>
+                <type>PROCESSOR</type>
+            </source>
+            <zIndex>0</zIndex>
+        </connections>
+        <connections>
+            <id>f6429a93-3f81-3c6d-0000-000000000000</id>
+            <parentGroupId>ad13454d-8fb5-3cf4-0000-000000000000</parentGroupId>
+            <backPressureDataSizeThreshold>1 GB</backPressureDataSizeThreshold>
+            <backPressureObjectThreshold>10000</backPressureObjectThreshold>
+            <destination>
+                <groupId>ad13454d-8fb5-3cf4-0000-000000000000</groupId>
+                <id>2ffceb4e-7893-3cee-0000-000000000000</id>
+                <type>PROCESSOR</type>
+            </destination>
+            <flowFileExpiration>0 sec</flowFileExpiration>
+            <labelIndex>1</labelIndex>
+            <loadBalanceCompression>DO_NOT_COMPRESS</loadBalanceCompression>
+            <loadBalancePartitionAttribute></loadBalancePartitionAttribute>
+            <loadBalanceStatus>LOAD_BALANCE_NOT_CONFIGURED</loadBalanceStatus>
+            <loadBalanceStrategy>DO_NOT_LOAD_BALANCE</loadBalanceStrategy>
+            <name></name>
+            <selectedRelationships>success</selectedRelationships>
+            <source>
+                <groupId>ad13454d-8fb5-3cf4-0000-000000000000</groupId>
+                <id>506bf292-e4b0-3d76-0000-000000000000</id>
+                <type>PROCESSOR</type>
+            </source>
+            <zIndex>0</zIndex>
+        </connections>
+        <processors>
+            <id>2ffceb4e-7893-3cee-0000-000000000000</id>
+            <parentGroupId>ad13454d-8fb5-3cf4-0000-000000000000</parentGroupId>
+            <position>
+                <x>0.0</x>
+                <y>248.0</y>
+            </position>
+            <bundle>
+                <artifact>nifi-ckan-nar</artifact>
+                <group>org.apache.nifi</group>
+                <version>1.0-SNAPSHOT</version>
+            </bundle>
+            <config>
+                <bulletinLevel>WARN</bulletinLevel>
+                <comments></comments>
+                <concurrentlySchedulableTaskCount>1</concurrentlySchedulableTaskCount>
+                <descriptors>
+                    <entry>
+                        <key>organizationName</key>
+                        <value>
+                            <name>organizationName</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>organizationType</key>
+                        <value>
+                            <name>organizationType</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>packageDescription</key>
+                        <value>
+                            <name>packageDescription</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>packageName</key>
+                        <value>
+                            <name>packageName</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>contactPoint</key>
+                        <value>
+                            <name>contactPoint</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>contactName</key>
+                        <value>
+                            <name>contactName</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>contactEmail</key>
+                        <value>
+                            <name>contactEmail</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>keywords</key>
+                        <value>
+                            <name>keywords</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>publisherURL</key>
+                        <value>
+                            <name>publisherURL</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>spatialCoverage</key>
+                        <value>
+                            <name>spatialCoverage</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>temporalStart</key>
+                        <value>
+                            <name>temporalStart</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>temporalEnd</key>
+                        <value>
+                            <name>temporalEnd</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>themes</key>
+                        <value>
+                            <name>themes</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>version</key>
+                        <value>
+                            <name>version</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>landingPage</key>
+                        <value>
+                            <name>landingPage</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>visibility</key>
+                        <value>
+                            <name>visibility</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>accessURL</key>
+                        <value>
+                            <name>accessURL</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>availability</key>
+                        <value>
+                            <name>availability</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>resourceDescription</key>
+                        <value>
+                            <name>resourceDescription</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>format</key>
+                        <value>
+                            <name>format</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>mimetype</key>
+                        <value>
+                            <name>mimetype</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>license</key>
+                        <value>
+                            <name>license</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>licenseType</key>
+                        <value>
+                            <name>licenseType</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>downloadURL</key>
+                        <value>
+                            <name>downloadURL</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>byteSize</key>
+                        <value>
+                            <name>byteSize</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>resourceName</key>
+                        <value>
+                            <name>resourceName</name>
+                        </value>
+                    </entry>
+                </descriptors>
+                <executionNode>ALL</executionNode>
+                <lossTolerant>false</lossTolerant>
+                <penaltyDuration>30 sec</penaltyDuration>
+                <properties>
+                    <entry>
+                        <key>organizationName</key>
+                        <value>dcatorgfull</value>
+                    </entry>
+                    <entry>
+                        <key>organizationType</key>
+                        <value>http://purl.org/adms/publishertype/Academia-ScientificOrganisation</value>
+                    </entry>
+                    <entry>
+                        <key>packageDescription</key>
+                        <value>description example of package</value>
+                    </entry>
+                    <entry>
+                        <key>packageName</key>
+                        <value>exampledatasetdcattest</value>
+                    </entry>
+                    <entry>
+                        <key>contactPoint</key>
+                        <value>http://example.com/contactUri</value>
+                    </entry>
+                    <entry>
+                        <key>contactName</key>
+                        <value>MaintainerName MaintainerSurname</value>
+                    </entry>
+                    <entry>
+                        <key>contactEmail</key>
+                        <value>example@email.com</value>
+                    </entry>
+                    <entry>
+                        <key>keywords</key>
+                        <value>newTag1,newTag2</value>
+                    </entry>
+                    <entry>
+                        <key>publisherURL</key>
+                        <value>http://example.com/publisher</value>
+                    </entry>
+                    <entry>
+                        <key>spatialCoverage</key>
+                        <value>[[[175.0, 65.0], [125.0, 65.0], [125.0, 68.0]]]</value>
+                    </entry>
+                    <entry>
+                        <key>temporalStart</key>
+                        <value>2021-05-26T12:23:45.123Z</value>
+                    </entry>
+                    <entry>
+                        <key>temporalEnd</key>
+                        <value>2021-05-26T12:23:45.123Z</value>
+                    </entry>
+                    <entry>
+                        <key>themes</key>
+                        <value>EDUC,ECON</value>
+                    </entry>
+                    <entry>
+                        <key>version</key>
+                        <value>2.0</value>
+                    </entry>
+                    <entry>
+                        <key>landingPage</key>
+                        <value>http://example.com/landingpage</value>
+                    </entry>
+                    <entry>
+                        <key>visibility</key>
+                        <value>public</value>
+                    </entry>
+                    <entry>
+                        <key>accessURL</key>
+                        <value>http://example.com/accessURL</value>
+                    </entry>
+                    <entry>
+                        <key>availability</key>
+                        <value>http://data.europa.eu/r5r/availability/stable</value>
+                    </entry>
+                    <entry>
+                        <key>resourceDescription</key>
+                        <value>example description of resource</value>
+                    </entry>
+                    <entry>
+                        <key>format</key>
+                        <value>JSON</value>
+                    </entry>
+                    <entry>
+                        <key>mimetype</key>
+                        <value>application/json</value>
+                    </entry>
+                    <entry>
+                        <key>license</key>
+                        <value>https://creativecommons.org/publicdomain/zero/1.0/</value>
+                    </entry>
+                    <entry>
+                        <key>licenseType</key>
+                        <value>http://purl.org/adms/licencetype/PublicDomain</value>
+                    </entry>
+                    <entry>
+                        <key>downloadURL</key>
+                        <value>http://example.com/downloadURL</value>
+                    </entry>
+                    <entry>
+                        <key>byteSize</key>
+                        <value>2000000</value>
+                    </entry>
+                    <entry>
+                        <key>resourceName</key>
+                        <value>resourceName</value>
+                    </entry>
+                </properties>
+                <runDurationMillis>0</runDurationMillis>
+                <schedulingPeriod>0 sec</schedulingPeriod>
+                <schedulingStrategy>TIMER_DRIVEN</schedulingStrategy>
+                <yieldDuration>1 sec</yieldDuration>
+            </config>
+            <executionNodeRestricted>false</executionNodeRestricted>
+            <name>UpdateCkanMetadataAttributes</name>
+            <relationships>
+                <autoTerminate>false</autoTerminate>
+                <name>Success</name>
+            </relationships>
+            <state>STOPPED</state>
+            <style/>
+            <type>org.apache.nifi.processors.ngsi.UpdateCkanMetadataAttributes</type>
+        </processors>
+        <processors>
+            <id>506bf292-e4b0-3d76-0000-000000000000</id>
+            <parentGroupId>ad13454d-8fb5-3cf4-0000-000000000000</parentGroupId>
+            <position>
+                <x>425.0</x>
+                <y>0.0</y>
+            </position>
+            <bundle>
+                <artifact>nifi-standard-nar</artifact>
+                <group>org.apache.nifi</group>
+                <version>1.13.0</version>
+            </bundle>
+            <config>
+                <bulletinLevel>WARN</bulletinLevel>
+                <comments></comments>
+                <concurrentlySchedulableTaskCount>1</concurrentlySchedulableTaskCount>
+                <descriptors>
+                    <entry>
+                        <key>Base Path</key>
+                        <value>
+                            <name>Base Path</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>Listening Port</key>
+                        <value>
+                            <name>Listening Port</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>health-check-port</key>
+                        <value>
+                            <name>health-check-port</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>Max Data to Receive per Second</key>
+                        <value>
+                            <name>Max Data to Receive per Second</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>SSL Context Service</key>
+                        <value>
+                            <identifiesControllerService>org.apache.nifi.ssl.RestrictedSSLContextService</identifiesControllerService>
+                            <name>SSL Context Service</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>client-authentication</key>
+                        <value>
+                            <dependencies>
+<propertyName>SSL Context Service</propertyName>
+                            </dependencies>
+                            <name>client-authentication</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>Authorized DN Pattern</key>
+                        <value>
+                            <name>Authorized DN Pattern</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>Max Unconfirmed Flowfile Time</key>
+                        <value>
+                            <name>Max Unconfirmed Flowfile Time</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>HTTP Headers to receive as Attributes (Regex)</key>
+                        <value>
+                            <name>HTTP Headers to receive as Attributes (Regex)</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>Return Code</key>
+                        <value>
+                            <name>Return Code</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>multipart-request-max-size</key>
+                        <value>
+                            <name>multipart-request-max-size</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>multipart-read-buffer-size</key>
+                        <value>
+                            <name>multipart-read-buffer-size</name>
+                        </value>
+                    </entry>
+                </descriptors>
+                <executionNode>ALL</executionNode>
+                <lossTolerant>false</lossTolerant>
+                <penaltyDuration>30 sec</penaltyDuration>
+                <properties>
+                    <entry>
+                        <key>Base Path</key>
+                        <value>ld/notify</value>
+                    </entry>
+                    <entry>
+                        <key>Listening Port</key>
+                        <value>5050</value>
+                    </entry>
+                    <entry>
+                        <key>health-check-port</key>
+                    </entry>
+                    <entry>
+                        <key>Max Data to Receive per Second</key>
+                    </entry>
+                    <entry>
+                        <key>SSL Context Service</key>
+                    </entry>
+                    <entry>
+                        <key>client-authentication</key>
+                        <value>AUTO</value>
+                    </entry>
+                    <entry>
+                        <key>Authorized DN Pattern</key>
+                        <value>.*</value>
+                    </entry>
+                    <entry>
+                        <key>Max Unconfirmed Flowfile Time</key>
+                        <value>60 secs</value>
+                    </entry>
+                    <entry>
+                        <key>HTTP Headers to receive as Attributes (Regex)</key>
+                        <value>.*</value>
+                    </entry>
+                    <entry>
+                        <key>Return Code</key>
+                        <value>200</value>
+                    </entry>
+                    <entry>
+                        <key>multipart-request-max-size</key>
+                        <value>1 MB</value>
+                    </entry>
+                    <entry>
+                        <key>multipart-read-buffer-size</key>
+                        <value>512 KB</value>
+                    </entry>
+                </properties>
+                <runDurationMillis>0</runDurationMillis>
+                <schedulingPeriod>0 sec</schedulingPeriod>
+                <schedulingStrategy>TIMER_DRIVEN</schedulingStrategy>
+                <yieldDuration>1 sec</yieldDuration>
+            </config>
+            <executionNodeRestricted>false</executionNodeRestricted>
+            <name>ListenHTTP</name>
+            <relationships>
+                <autoTerminate>false</autoTerminate>
+                <name>success</name>
+            </relationships>
+            <state>STOPPED</state>
+            <style/>
+            <type>org.apache.nifi.processors.standard.ListenHTTP</type>
+        </processors>
+        <processors>
+            <id>d44cdb8b-3f3f-3d25-0000-000000000000</id>
+            <parentGroupId>ad13454d-8fb5-3cf4-0000-000000000000</parentGroupId>
+            <position>
+                <x>537.0</x>
+                <y>408.0</y>
+            </position>
+            <bundle>
+                <artifact>nifi-ngsi-nar</artifact>
+                <group>org.apache.nifi</group>
+                <version>1.3.6</version>
+            </bundle>
+            <config>
+                <bulletinLevel>WARN</bulletinLevel>
+                <comments></comments>
+                <concurrentlySchedulableTaskCount>1</concurrentlySchedulableTaskCount>
+                <descriptors>
+                    <entry>
+                        <key>CKAN Host</key>
+                        <value>
+                            <name>CKAN Host</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>CKAN Port</key>
+                        <value>
+                            <name>CKAN Port</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>CKAN Viewer</key>
+                        <value>
+                            <name>CKAN Viewer</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>CKAN API Key</key>
+                        <value>
+                            <name>CKAN API Key</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>ORION URL</key>
+                        <value>
+                            <name>ORION URL</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>SSL</key>
+                        <value>
+                            <name>SSL</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>ngsi-version</key>
+                        <value>
+                            <name>ngsi-version</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>data-model</key>
+                        <value>
+                            <name>data-model</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>attr-persistence</key>
+                        <value>
+                            <name>attr-persistence</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>default-service</key>
+                        <value>
+                            <name>default-service</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>default-service-path</key>
+                        <value>
+                            <name>default-service-path</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>enable-encoding</key>
+                        <value>
+                            <name>enable-encoding</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>enable-lowercase</key>
+                        <value>
+                            <name>enable-lowercase</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>Batch Size</key>
+                        <value>
+                            <name>Batch Size</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>Max Connections</key>
+                        <value>
+                            <name>Max Connections</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>Max Connections per Route</key>
+                        <value>
+                            <name>Max Connections per Route</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>rollback-on-failure</key>
+                        <value>
+                            <name>rollback-on-failure</name>
+                        </value>
+                    </entry>
+                </descriptors>
+                <executionNode>ALL</executionNode>
+                <lossTolerant>false</lossTolerant>
+                <penaltyDuration>30 sec</penaltyDuration>
+                <properties>
+                    <entry>
+                        <key>CKAN Host</key>
+                        <value>138.4.22.130</value>
+                    </entry>
+                    <entry>
+                        <key>CKAN Port</key>
+                        <value>5000</value>
+                    </entry>
+                    <entry>
+                        <key>CKAN Viewer</key>
+                        <value>recline_view</value>
+                    </entry>
+                    <entry>
+                        <key>CKAN API Key</key>
+                        <value>f6829d82-388d-4329-84cc-1edfdb163db0</value>
+                    </entry>
+                    <entry>
+                        <key>ORION URL</key>
+                        <value> http://localhost:1026</value>
+                    </entry>
+                    <entry>
+                        <key>SSL</key>
+                        <value>false</value>
+                    </entry>
+                    <entry>
+                        <key>ngsi-version</key>
+                        <value>ld</value>
+                    </entry>
+                    <entry>
+                        <key>data-model</key>
+                        <value>db-by-entity</value>
+                    </entry>
+                    <entry>
+                        <key>attr-persistence</key>
+                        <value>column</value>
+                    </entry>
+                    <entry>
+                        <key>default-service</key>
+                        <value>test</value>
+                    </entry>
+                    <entry>
+                        <key>default-service-path</key>
+                        <value>/path</value>
+                    </entry>
+                    <entry>
+                        <key>enable-encoding</key>
+                        <value>false</value>
+                    </entry>
+                    <entry>
+                        <key>enable-lowercase</key>
+                        <value>false</value>
+                    </entry>
+                    <entry>
+                        <key>Batch Size</key>
+                        <value>10</value>
+                    </entry>
+                    <entry>
+                        <key>Max Connections</key>
+                        <value>500</value>
+                    </entry>
+                    <entry>
+                        <key>Max Connections per Route</key>
+                        <value>100</value>
+                    </entry>
+                    <entry>
+                        <key>rollback-on-failure</key>
+                        <value>false</value>
+                    </entry>
+                </properties>
+                <runDurationMillis>0</runDurationMillis>
+                <schedulingPeriod>0 sec</schedulingPeriod>
+                <schedulingStrategy>TIMER_DRIVEN</schedulingStrategy>
+                <yieldDuration>1 sec</yieldDuration>
+            </config>
+            <executionNodeRestricted>false</executionNodeRestricted>
+            <name>NGSIToCKAN</name>
+            <relationships>
+                <autoTerminate>true</autoTerminate>
+                <name>failure</name>
+            </relationships>
+            <relationships>
+                <autoTerminate>true</autoTerminate>
+                <name>retry</name>
+            </relationships>
+            <relationships>
+                <autoTerminate>true</autoTerminate>
+                <name>success</name>
+            </relationships>
+            <state>STOPPED</state>
+            <style/>
+            <type>org.apache.nifi.processors.ngsi.NGSIToCKAN</type>
+        </processors>
+    </snippet>
+    <timestamp>12/08/2021 23:27:12 CET</timestamp>
+</template>

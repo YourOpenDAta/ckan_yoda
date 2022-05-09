@@ -91,9 +91,9 @@ RUN cd $CKAN_VENV/src/ && \
     ckan-pip3 install --upgrade --no-cache-dir -r ckanext-dcat/requirements.txt && \
     #ckan-pip3 install --upgrade --no-cache-dir -r ckanext-dcat/dev-requirements.txt && \
     #ckanext-dcatpapedp
-    ckan-pip3 install -e git+https://github.com/YourOpenDAta/ckanext-dcatapedp.git@alpha#egg=ckanext-dcatapedp && \
+    ckan-pip3 install -e git+https://github.com/YourOpenDAta/ckanext-dcatapedp.git@alpha-flask#egg=ckanext-dcatapedp && \
     ckan-pip3 install --upgrade --no-cache-dir -r ckanext-dcatapedp/requirements.txt
-    #ckan-pip3 install --upgrade --no-cache-dir -r ckanext-dcat/dev-requirements.txt && \
+    # ckan-pip3 install --upgrade --no-cache-dir -r ckanext-dcat/dev-requirements.txt
 
 ADD ckan_${CKAN_VERSION}/ckan-entrypoint.sh /ckan-entrypoint.sh
 
@@ -106,4 +106,4 @@ USER ckan
 EXPOSE 5000
 
 #CMD sleep 300000
-CMD ["ckan","-c","/etc/ckan/production.ini", "run", "--host", "0.0.0.0"]
+CMD ["ckan","-c","/etc/ckan/production.ini", "run", "--host", "0.0.0.0", "--threaded"]
