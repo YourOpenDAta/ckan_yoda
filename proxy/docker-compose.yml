@@ -1,0 +1,19 @@
+version: '3.5'
+services:
+  proxy:
+    image: nginx:1.21
+    container_name: proxy_yoda
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ./configs/:/etc/nginx/conf.d/:ro
+      - ./public/:/usr/share/nginx/html/:ro
+    networks:
+      - ckan_yoda
+    restart: unless-stopped
+
+networks:
+  ckan_yoda:
+    external:
+      name: ckan_yoda

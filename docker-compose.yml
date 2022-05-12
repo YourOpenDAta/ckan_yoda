@@ -2,28 +2,20 @@
 # If "docker-compose logs ckan" shows DB not ready, run "docker-compose restart ckan" a few times.
 version: "3.5"
 
-volumes:
-  ckan_config:
-  ckan_home:
-  ckan_storage:
-  pg_data:
-  solr_data:
-
 services:
   ckan:
     container_name: ckan_yoda
     build:
       context: ./
-      dockerfile: ckan_${CKAN_VERSION}/Dockerfile 
+      dockerfile: ckan_${CKAN_VERSION}/Dockerfile
       args:
           - CKAN_SITE_URL=${CKAN_SITE_URL}
           - CKAN_VERSION=${CKAN_VERSION}
-    links:
-      - db
-      - solr
-      - redis
-    ports:
-      - "0.0.0.0:${CKAN_PORT}:5000"
+          - CKAN_PORT=${CKAN_PORT}
+    # ports:
+    #   - "5000:${CKAN_PORT}"
+    expose:
+        - ${CKAN_PORT}
     environment:
       # Defaults work with linked containers, change to use own Postgres, SolR, Redis or Datapusher
       - CKAN_SQLALCHEMY_URL=postgresql://ckan:${POSTGRES_PASSWORD}@db/ckan
@@ -37,17 +29,21 @@ services:
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
       - DS_RO_PASS=${DATASTORE_READONLY_PASSWORD}
       - POSTGRES_HOST=db
-    restart: unless-stopped
     volumes:
       - ckan_config:/etc/ckan
       - ckan_home:/usr/lib/ckan
       - ckan_storage:/var/lib/ckan
+    networks:
+      - ckan_yoda
+    restart: unless-stopped
 
   # datapusher:
   #   container_name: datapusher_yoda
   #   image: clementmouchet/datapusher
   #   ports:
   #     - "8800:8800"
+  #   networks:
+  #     - ckan_yoda
 
   db:
     container_name: db_yoda
@@ -62,6 +58,8 @@ services:
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
     volumes:
       - pg_data:/var/lib/postgresql/data
+    networks: 
+      - ckan_yoda
     restart: unless-stopped
 
   solr:
@@ -71,9 +69,25 @@ services:
       dockerfile: solr/Dockerfile
     volumes:
       - solr_data:/opt/solr/server/solr/ckan/data
+    networks:
+      - ckan_yoda
     restart: unless-stopped
 
   redis:
     container_name: redis_yoda
     image: redis:6.2
+    networks:
+      - ckan_yoda
     restart: unless-stopped
+
+volumes:
+  ckan_config:
+  ckan_home:
+  ckan_storage:
+  pg_data:
+  solr_data:
+
+networks:
+  ckan_yoda:
+    external:
+      name: ckan_yoda

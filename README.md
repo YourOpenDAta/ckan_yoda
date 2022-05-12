@@ -26,7 +26,11 @@
 
 1. Copy `template.env` to `.env`.
 2. Set-up `.env` file.
-3. Build and run containers
+3. Create the ckan_yoda docker network
+```
+docker network create ckan_yoda
+```
+4. Build and run containers
 
 ```
 # ckan and fiware
@@ -39,10 +43,26 @@ docker-compose --file docker-compose.yml up -d --build
 docker-compose --file docker-compose.fiware.yml up -d --build
 ```
 
-4. Only the first time, configure ckan extensions
+5. Only the first time, configure ckan extensions
 
 ```
 ./ckan_{CKAN_VERSION}/configure_ckan.sh
+```
+
+6. Start reverse-proxy
+```
+cd proxy
+docker-compose up -d --build
+```
+If you make any change in the proxy you have to restart it:
+```
+docker-compose restart proxy
+```
+
+In development you have to modify `/etc/hosts` adding the mapping of the services to the reverse proxy:
+```
+127.0.0.1 portal.yoda
+127.0.0.1 orion.yoda
 ```
 
 ### Create data samples (for testing)
@@ -99,31 +119,34 @@ curl -L -X POST 'http://localhost:1026/ngsi-ld/v1/subscriptions/' \
   
   <br/>
 Architecture elements: 
-- Network: ckan_yoda_default
-  - CKAN environment
-    - ckan_yoda (*container*)
-      - /var/lib/ckan
-      - /usr/lib/ckan
-      - /etc/ckan
-    - db_yoda (*container*)
-      - /var/lib/postgresql/data
-    - redis_yoda (*container*)
-      - /data
-    - solr_yoda (*container*)
-      - /opt/solr/server/solr/ckan/data
-  - FIWARE environment
-    - draco_yoda (*container*)
-      - /opt/nifi/nifi-current/state
-      - /opt/nifi/nifi-current/conf
-      - /opt/nifi/nifi-current/content_repository
-      - /opt/nifi/nifi-current/database_repository
-      - /opt/nifi/nifi-current/flowfile_repository
-      - /opt/nifi/nifi-current/logs
-      - /opt/nifi/nifi-current/provenance_repository
-    - orion_yoda (*container*)
-    - mongo_yoda (*container*)
-      - /data/db
-      - /data/configdb
+- Network: ckan_yoda
+  - Proxy:
+    - Maps portal.yoda to ckan
+    - Maps orion.yoda to orion (TODO)
+    - CKAN environment
+      - ckan_yoda (*container*)
+        - /var/lib/ckan
+        - /usr/lib/ckan
+        - /etc/ckan
+      - db_yoda (*container*)
+        - /var/lib/postgresql/data
+      - redis_yoda (*container*)
+        - /data
+      - solr_yoda (*container*)
+        - /opt/solr/server/solr/ckan/data
+    - FIWARE environment
+      - draco_yoda (*container*)
+        - /opt/nifi/nifi-current/state
+        - /opt/nifi/nifi-current/conf
+        - /opt/nifi/nifi-current/content_repository
+        - /opt/nifi/nifi-current/database_repository
+        - /opt/nifi/nifi-current/flowfile_repository
+        - /opt/nifi/nifi-current/logs
+        - /opt/nifi/nifi-current/provenance_repository
+      - orion_yoda (*container*)
+      - mongo_yoda (*container*)
+        - /data/db
+        - /data/configdb
 
 
 

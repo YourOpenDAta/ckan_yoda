@@ -4,7 +4,6 @@ services:
     image: mongo:${MONGO_VERSION}
     container_name: mongo_yoda
     command: --nojournal
-    restart: always
     ports:
       - "${MONGO_PORT}:27017"
     environment:
@@ -16,21 +15,28 @@ services:
         mongo --quiet $host/test --eval 'quit(db.runCommand({ ping: 1 }).ok ? 0 : 2)' && echo 0 || echo 1
     volumes: 
       - mongo-db-data:/data/db 
+    networks:
+      - ckan_yoda
+    restart: unless-stopped
 
   orion:
     image: fiware/orion-ld:${ORION_VERSION}
     container_name: orion_yoda
-    restart: always
     depends_on:
       - mongo
     command: -dbhost mongo
-    ports:
-      - "${ORION_PORT}:1026"
+    # ports:
+    #   - "${ORION_PORT}:1026"
+    expose:
+      - 1026
     environment:
       ORIONLD_MONGO_USER: ${MONGO_ROOT_USERNAME}
       ORIONLD_MONGO_PASSWORD: ${MONGO_ROOT_PASSWORD}
+    networks:
+      - ckan_yoda
+    restart: unless-stopped
     healthcheck:
-      test: curl --fail -s http://orion:${ORION_PORT}/version || exit 1
+      test: curl --fail -s http://orion:1026/version || exit 1
 
   draco:
     #image: ging/fiware-draco:${DRACO_VERSION}
@@ -39,7 +45,6 @@ services:
       args:
         DRACO_VERSION: ${DRACO_VERSION}
     container_name: draco_yoda
-    restart: always
     depends_on:
       - orion
     ports:
@@ -47,6 +52,9 @@ services:
       - "${DRACO_PORT}:5050"
     environment:
       - NIFI_WEB_HTTP_PORT=${DRACO_WEB_PORT}
+    networks:
+      - ckan_yoda
+    restart: unless-stopped
     healthcheck:
       test: curl --fail -s http://draco:${DRACO_WEB_PORT}/nifi-api/system-diagnostics || exit 1
       start_period: 1m
@@ -54,3 +62,8 @@ services:
 
 volumes: 
   mongo-db-data:
+
+networks:
+  ckan_yoda:
+    external:
+      name: ckan_yoda

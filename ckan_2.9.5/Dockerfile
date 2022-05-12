@@ -50,8 +50,6 @@ ENV CKAN_VENV=$CKAN_HOME/venv
 ENV CKAN_CONFIG=/etc/ckan
 ENV CKAN_STORAGE_PATH=/var/lib/ckan
 
-# Build-time variables specified by docker-compose.yml / .env
-ARG CKAN_SITE_URL
 
 # Create ckan user
 RUN useradd -r -u 900 -m -c "ckan account" -d $CKAN_HOME -s /bin/false ckan
@@ -100,10 +98,13 @@ ADD ckan_${CKAN_VERSION}/ckan-entrypoint.sh /ckan-entrypoint.sh
 RUN chmod +x /ckan-entrypoint.sh && \
     chown -R ckan:ckan $CKAN_HOME $CKAN_VENV $CKAN_CONFIG $CKAN_STORAGE_PATH
 
+# Configurate CKAN_PORT env
+ARG CKAN_PORT=5000
+ENV CKAN_PORT=${CKAN_PORT}
+
 ENTRYPOINT ["/ckan-entrypoint.sh"]
 
 USER ckan
-EXPOSE 5000
+EXPOSE ${CKAN_PORT}
 
-#CMD sleep 300000
-CMD ["ckan","-c","/etc/ckan/production.ini", "run", "--host", "0.0.0.0", "--threaded"]
+CMD ckan -c /etc/ckan/production.ini run --host 0.0.0.0 --port $CKAN_PORT --threaded
