@@ -1,2 +1,4 @@
 .env
 docker-compose.development*
+proxy/ssl/*.key
+proxy/ssl/*.crt

@@ -48,9 +48,6 @@ ENV CKAN_VENV=$CKAN_HOME/venv
 ENV CKAN_CONFIG=/etc/ckan
 ENV CKAN_STORAGE_PATH=/var/lib/ckan
 
-# Build-time variables specified by docker-compose.yml / .env
-ARG CKAN_SITE_URL
-
 # Create ckan user
 RUN useradd -r -u 900 -m -c "ckan account" -d $CKAN_HOME -s /bin/false ckan
 

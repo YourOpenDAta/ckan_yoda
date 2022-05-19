@@ -9,6 +9,7 @@ services:
     volumes:
       - ./configs/:/etc/nginx/conf.d/:ro
       - ./public/:/usr/share/nginx/html/:ro
+      - ./ssl/:/etc/nginx/ssl/:ro
     networks:
       - ckan_yoda
     restart: unless-stopped

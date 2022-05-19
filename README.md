@@ -30,7 +30,14 @@
 ```
 docker network create ckan_yoda
 ```
-4. Build and run containers
+4. Create or copy the ckan.crt, ckan.key, orion.crt, orion.key inside `proxy/ssl`
+    - In development you can generate them by:
+  ```
+  openssl req -x509 -nodes -days 365 -newkey rsa:4096 -keyout ckan.key -out ckan.crt
+  openssl req -x509 -nodes -days 365 -newkey rsa:4096 -keyout orion.key -out orion.crt
+  ``` 
+5. Build and run containers
+
 
 ```
 # ckan and fiware
@@ -43,13 +50,13 @@ docker-compose --file docker-compose.yml up -d --build
 docker-compose --file docker-compose.fiware.yml up -d --build
 ```
 
-5. Only the first time, configure ckan extensions
+6. Only the first time, configure ckan extensions
 
 ```
 ./ckan_{CKAN_VERSION}/configure_ckan.sh
 ```
 
-6. Start reverse-proxy
+7. Start reverse-proxy
 ```
 cd proxy
 docker-compose up -d --build
@@ -61,8 +68,16 @@ docker-compose restart proxy
 
 In development you have to modify `/etc/hosts` adding the mapping of the services to the reverse proxy:
 ```
-127.0.0.1 portal.yoda
+127.0.0.1 ckan.yoda
 127.0.0.1 orion.yoda
+```
+
+8. Access to ckan or orion
+
+```
+http://ckan.yoda/
+https://ckan.yoda/
+
 ```
 
 ### Create data samples (for testing)
@@ -121,7 +136,7 @@ curl -L -X POST 'http://localhost:1026/ngsi-ld/v1/subscriptions/' \
 Architecture elements: 
 - Network: ckan_yoda
   - Proxy:
-    - Maps portal.yoda to ckan
+    - Maps ckan.yoda to ckan
     - Maps orion.yoda to orion (TODO)
     - CKAN environment
       - ckan_yoda (*container*)
