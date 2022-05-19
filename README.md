@@ -77,6 +77,8 @@ In development you have to modify `/etc/hosts` adding the mapping of the service
 ```
 http://ckan.yoda/
 https://ckan.yoda/
+http://orion.yoda/version
+https://orion.yoda/version
 
 ```
 
