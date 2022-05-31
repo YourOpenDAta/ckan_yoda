@@ -16,5 +16,5 @@ services:
 
 networks:
   ckan_yoda:
-    external:
-      name: ckan_yoda
+    external: true
+    name: ckan_yoda

@@ -60,6 +60,14 @@ RUN mkdir -p $CKAN_VENV $CKAN_CONFIG $CKAN_STORAGE_PATH && \
     ln -s $CKAN_VENV/bin/pip3 /usr/local/bin/ckan-pip3 &&\
     ln -s $CKAN_VENV/bin/ckan /usr/local/bin/ckan
 
+
+ADD ckan_${CKAN_VERSION}/ckan-entrypoint.sh /ckan-entrypoint.sh
+
+RUN chmod +x /ckan-entrypoint.sh && \
+    chown -R ckan:ckan $CKAN_HOME $CKAN_VENV $CKAN_CONFIG $CKAN_STORAGE_PATH
+
+USER ckan
+
 # Virtual environment binaries/scripts to be used first
 ENV PATH=${CKAN_VENV}/bin:${PATH}
 
@@ -93,10 +101,6 @@ RUN cd $CKAN_VENV/src/ && \
     ckan-pip3 install --upgrade --no-cache-dir -r ckanext-dcatapedp/requirements.txt
     # ckan-pip3 install --upgrade --no-cache-dir -r ckanext-dcat/dev-requirements.txt
 
-ADD ckan_${CKAN_VERSION}/ckan-entrypoint.sh /ckan-entrypoint.sh
-
-RUN chmod +x /ckan-entrypoint.sh && \
-    chown -R ckan:ckan $CKAN_HOME $CKAN_VENV $CKAN_CONFIG $CKAN_STORAGE_PATH
 
 # Configurate CKAN_PORT env
 ARG CKAN_PORT=5000
@@ -104,7 +108,6 @@ ENV CKAN_PORT=${CKAN_PORT}
 
 ENTRYPOINT ["/ckan-entrypoint.sh"]
 
-USER ckan
 EXPOSE ${CKAN_PORT}
 
 CMD ckan -c /etc/ckan/production.ini run --host 0.0.0.0 --port $CKAN_PORT --threaded

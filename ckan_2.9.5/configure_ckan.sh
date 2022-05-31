@@ -4,22 +4,6 @@ parent_path=$(dirname $path)
 cd $parent_path
 source ./.env
 
-# Build and start environment
-# list of containers: ckan_yoda, redis_yoda, solr_yoda, db_yoda
-# list of volumes: ckan_yoda_ckan_config, ckan_yoda_ckan_home, ckan_yoda_ckan_storage, ckan_yoda_pg_data, ckan_yoda_solr_data
-
-# Find the path to a named volume
-docker volume inspect ckan_yoda_ckan_home | jq -c '.[] | .Mountpoint'
-# "/var/lib/docker/volumes/docker_ckan_config/_data"
-
-export VOL_CKAN_HOME=`docker volume inspect ckan_yoda_ckan_home | jq -r -c '.[] | .Mountpoint'`
-echo $VOL_CKAN_HOME
-
-export VOL_CKAN_CONFIG=`docker volume inspect ckan_yoda_ckan_config | jq -r -c '.[] | .Mountpoint'`
-echo $VOL_CKAN_CONFIG
-
-export VOL_CKAN_STORAGE=`docker volume inspect ckan_yoda_ckan_storage | jq -r -c '.[] | .Mountpoint'`
-echo $VOL_CKAN_STORAGE
 
 # configure datastore
 docker exec ckan_yoda /usr/local/bin/ckan -c /etc/ckan/production.ini datastore set-permissions | docker exec -i db_yoda psql -U ckan
@@ -34,35 +18,6 @@ docker exec -it ckan_yoda /usr/local/bin/ckan config-tool /etc/ckan/production.i
 docker exec -it ckan_yoda /usr/local/bin/ckan -c /etc/ckan/production.ini harvester initdb
 
 
-docker-compose -f ./docker-compose.yml restart ckan
-
-#create test data but it does not save them in the database
-# docker exec -it ckan_yoda /usr/local/bin/ckan -c /etc/ckan/production.ini seed basic
-# docker exec -it ckan_yoda /usr/local/bin/ckan -c /etc/ckan/production.ini seed family
-# docker exec -it ckan_yoda /usr/local/bin/ckan -c /etc/ckan/production.ini seed gov
-# docker exec -it ckan_yoda /usr/local/bin/ckan -c /etc/ckan/production.ini seed hierarchy
-# docker exec -it ckan_yoda /usr/local/bin/ckan -c /etc/ckan/production.ini seed search
-# docker exec -it ckan_yoda /usr/local/bin/ckan -c /etc/ckan/production.ini seed translations
-# docker exec -it ckan_yoda /usr/local/bin/ckan -c /etc/ckan/production.ini seed user
-# docker exec -it ckan_yoda /usr/local/bin/ckan -c /etc/ckan/production.ini seed vocabs
-
-## Dump database
-## inside docker container (only dumps one database in this case ckan but not the datastore one)
-# pg_dump -U ckan --format=custom -d ckan > ckan.dump
-
-## Restore database
-# docker exec -it ckan_yoda /usr/local/bin/ckan -c /etc/ckan/production.ini db clean
-## inside db_yoda docker container
- 
-# pg_restore --clean --if-exists -d ckan < ckan.dump
-# docker exec -it ckan_yoda /usr/local/bin/ckan -c /etc/ckan/production.ini search-index rebuild
-
-## Clean database
-# docker exec -it ckan_yoda /usr/local/bin/ckan -c /etc/ckan/production.ini db clean
-
-## Init database from scratch
-# docker exec -it ckan_yoda /usr/local/bin/ckan -c /etc/ckan/production.ini search-index rebuild
-# docker exec -it ckan_yoda /usr/local/bin/ckan -c /etc/ckan/production.ini db init
+docker compose -f ./docker-compose.yml restart ckan
 
 
-#http://localhost:5000/

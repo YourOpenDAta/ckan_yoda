@@ -30,24 +30,23 @@
 ```
 docker network create ckan_yoda
 ```
-4. Create or copy the ckan.crt, ckan.key, orion.crt, orion.key inside `proxy/ssl`
+4. Create or copy the ckan.crt, ckan.key `proxy/ssl`
     - In development you can generate them by:
   ```
   openssl req -x509 -nodes -days 365 -newkey rsa:4096 -keyout ckan.key -out ckan.crt
-  openssl req -x509 -nodes -days 365 -newkey rsa:4096 -keyout orion.key -out orion.crt
   ``` 
 5. Build and run containers
 
 
 ```
 # ckan and fiware
-docker-compose --file docker-compose.yml --file docker-compose.fiware.yml up -d --build
+docker compose --file docker-compose.yml --file docker-compose.fiware.yml up -d --build
 
 # only ckan
-docker-compose --file docker-compose.yml up -d --build
+docker compose --file docker-compose.yml up -d --build
 
 # only fiware
-docker-compose --file docker-compose.fiware.yml up -d --build
+docker compose --file docker-compose.fiware.yml up -d --build
 ```
 
 6. Only the first time, configure ckan extensions
@@ -68,17 +67,17 @@ docker-compose restart proxy
 
 In development you have to modify `/etc/hosts` adding the mapping of the services to the reverse proxy:
 ```
-127.0.0.1 ckan.yoda
-127.0.0.1 orion.yoda
+127.0.0.1 portal-yoda.dit.upm.es
+127.0.0.1 broker-yoda.dit.upm.es
 ```
 
 8. Access to ckan or orion
 
 ```
-http://ckan.yoda/
-https://ckan.yoda/
-http://orion.yoda/version
-https://orion.yoda/version
+http://portal-yoda.dit.upm.es/
+https://portal-yoda.dit.upm.es/
+http://broker-yoda.dit.upm.es/version
+https://broker-yoda.dit.upm.es/version
 
 ```
 
@@ -93,6 +92,47 @@ docker exec -it ckan_yoda /usr/local/bin/ckan -c /etc/ckan/production.ini seed s
 docker exec -it ckan_yoda /usr/local/bin/ckan -c /etc/ckan/production.ini seed translations
 docker exec -it ckan_yoda /usr/local/bin/ckan -c /etc/ckan/production.ini seed user
 docker exec -it ckan_yoda /usr/local/bin/ckan -c /etc/ckan/production.ini seed vocabs
+```
+
+### Database management
+
+#### Dump database
+
+Inside docker container (only dumps one database in this case ckan but not the datastore one)
+
+```
+pg_dump -U ckan --format=custom -d ckan > ckan.dump
+```
+
+#### Restore database
+
+First clear the database
+
+```
+# docker exec -it ckan_yoda /usr/local/bin/ckan -c /etc/ckan/production.ini db clean
+```
+
+Inside `db_yoda` docker container
+
+``` 
+pg_restore --clean --if-exists -d ckan < ckan.dump
+```
+
+```
+docker exec -it ckan_yoda /usr/local/bin/ckan -c /etc/ckan/production.ini search-index rebuild
+```
+
+#### Clean database
+
+```
+docker exec -it ckan_yoda /usr/local/bin/ckan -c /etc/ckan/production.ini db clean
+```
+
+#### Init database from scratch
+
+```
+docker exec -it ckan_yoda /usr/local/bin/ckan -c /etc/ckan/production.ini search-index rebuild
+docker exec -it ckan_yoda /usr/local/bin/ckan -c /etc/ckan/production.ini db init
 ```
 
 ### DRACO templates
@@ -138,8 +178,8 @@ curl -L -X POST 'http://localhost:1026/ngsi-ld/v1/subscriptions/' \
 Architecture elements: 
 - Network: ckan_yoda
   - Proxy:
-    - Maps ckan.yoda to ckan
-    - Maps orion.yoda to orion (TODO)
+    - Maps to ckan
+    - Maps to orion
     - CKAN environment
       - ckan_yoda (*container*)
         - /var/lib/ckan
@@ -174,8 +214,6 @@ Database management: [https://docs.ckan.org/en/2.9/maintaining/database-manageme
 
 ## Todo
 
-- [ ] Select name for the portal -> YODA  
-- [ ] Select url for the portal and orion -> 
 - [ ] Securization of the portal
 - [ ] Test pagination in catalogue
 - [ ] Improve css of the portal
