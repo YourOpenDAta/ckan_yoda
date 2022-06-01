@@ -85,21 +85,30 @@ RUN ckan-pip3 install -U pip && \
     ckan-pip3 install -e $CKAN_VENV/src/ckan/ && \
     ln -s $CKAN_VENV/src/ckan/ckan/config/who.ini $CKAN_CONFIG/who.ini
 
+WORKDIR $CKAN_VENV/src/
+
 # Download extensions
-RUN cd $CKAN_VENV/src/ && \
+
     # ckanext-harvest
-    ckan-pip3 install -e git+https://github.com/ckan/ckanext-harvest.git@v1.3.4#egg=ckanext-harvest && \
-    ckan-pip3 install --upgrade --no-cache-dir -r ckanext-harvest/pip-requirements.txt && \
-    # ckan-pip3 install --upgrade --no-cache-dir -r ckanext-harvest/dev-requirements.txt && \
+RUN ckan-pip3 install -e git+https://github.com/ckan/ckanext-harvest.git@v1.3.4#egg=ckanext-harvest && \
+    ckan-pip3 install --upgrade --no-cache-dir -r ckanext-harvest/pip-requirements.txt
+    # ckan-pip3 install --upgrade --no-cache-dir -r ckanext-harvest/dev-requirements.txt
+
     # ckanext-dcat
-    ckan-pip3 install urllib3 && \
+RUN ckan-pip3 install urllib3 && \
     ckan-pip3 install -e git+https://github.com/ckan/ckanext-dcat.git@v1.1.3#egg=ckanext-dcat && \
-    ckan-pip3 install --upgrade --no-cache-dir -r ckanext-dcat/requirements.txt && \
-    #ckan-pip3 install --upgrade --no-cache-dir -r ckanext-dcat/dev-requirements.txt && \
+    ckan-pip3 install --upgrade --no-cache-dir -r ckanext-dcat/requirements.txt
+    #ckan-pip3 install --upgrade --no-cache-dir -r ckanext-dcat/dev-requirements.txt
+
     #ckanext-dcatpapedp
-    ckan-pip3 install -e git+https://github.com/YourOpenDAta/ckanext-dcatapedp.git@alpha-flask#egg=ckanext-dcatapedp && \
+RUN  ckan-pip3 install -e git+https://github.com/YourOpenDAta/ckanext-dcatapedp.git@alpha-flask#egg=ckanext-dcatapedp && \
     ckan-pip3 install --upgrade --no-cache-dir -r ckanext-dcatapedp/requirements.txt
     # ckan-pip3 install --upgrade --no-cache-dir -r ckanext-dcat/dev-requirements.txt
+
+    #ckanext-yoda_theme
+RUN ckan-pip3 install -e git+https://github.com/YourOpenDAta/ckanext-yoda_theme.git@alpha#egg=ckanext-yoda_theme
+    # ckan-pip3 install --upgrade --no-cache-dir -r ckanext-yoda_theme/requirements.txt
+    # ckan-pip3 install --upgrade --no-cache-dir -r ckanext-yoda_theme/dev-requirements.txt
 
 
 # Configurate CKAN_PORT env

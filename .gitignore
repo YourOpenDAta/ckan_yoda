@@ -1,5 +1,4 @@
 .env
-docker-compose.development*
 proxy/ssl/*
 proxy/ssl/*
 !proxy/ssl/.gitkeep
