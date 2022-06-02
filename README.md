@@ -6,6 +6,11 @@
   - [Set-up](#set-up)
     - [Configure services](#configure-services)
     - [Create data samples (for testing)](#create-data-samples-for-testing)
+    - [Database management](#database-management)
+      - [Dump database](#dump-database)
+      - [Restore database](#restore-database)
+      - [Clean database](#clean-database)
+      - [Init database from scratch](#init-database-from-scratch)
     - [DRACO templates](#draco-templates)
       - [AEMET](#aemet)
   - [Architecture](#architecture)
@@ -142,7 +147,7 @@ docker exec -it ckan_yoda /usr/local/bin/ckan -c /etc/ckan/production.ini db ini
 1. Load `aemet_template_orion`
 2. Load `aemet_template_ckan`
    1. Add CKAN API key in `NGSIToCKANProcessor` to enable the creation of datasets, organizations and resources
-3. Create subscription in `orion-ld`
+3. Create subscription in `orion`
 ```
 curl -L -X POST 'http://localhost:1026/ngsi-ld/v1/subscriptions/' \
 -H 'Content-Type: application/ld+json' \
