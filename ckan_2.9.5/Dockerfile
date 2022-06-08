@@ -1,5 +1,5 @@
 # See CKAN docs on installation from Docker Compose on usage
-FROM ubuntu:focal
+FROM ubuntu:focal as base
 
 # Set timezone
 ENV TZ=UTC
@@ -10,6 +10,10 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 ARG CKAN_VERSION
 ARG CKAN_BASE_URL=https://github.com/ckan/ckan/archive/refs/tags
 ARG CKAN_CODE_PATH=${CKAN_BASE_URL}/ckan-${CKAN_VERSION}.zip
+
+# Configurate CKAN_PORT env
+ARG CKAN_PORT=5000
+ENV CKAN_PORT=${CKAN_PORT}
 
 # # Setting the locale
 # ENV LC_ALL=en_US.UTF-8       
@@ -50,7 +54,6 @@ ENV CKAN_VENV=$CKAN_HOME/venv
 ENV CKAN_CONFIG=/etc/ckan
 ENV CKAN_STORAGE_PATH=/var/lib/ckan
 
-
 # Create ckan user
 RUN useradd -r -u 900 -m -c "ckan account" -d $CKAN_HOME -s /bin/false ckan
 
@@ -85,6 +88,21 @@ RUN ckan-pip3 install -U pip && \
     ckan-pip3 install -e $CKAN_VENV/src/ckan/ && \
     ln -s $CKAN_VENV/src/ckan/ckan/config/who.ini $CKAN_CONFIG/who.ini
 
+EXPOSE ${CKAN_PORT}
+
+FROM base as dev
+USER root
+RUN ckan-pip3 install -r $CKAN_VENV/src/ckan/dev-requirements.txt && \
+    ckan-pip3 install pytest-ckan
+
+WORKDIR $CKAN_VENV/src/
+ENTRYPOINT ["/ckan-entrypoint.sh"]
+CMD ckan -c /etc/ckan/production.ini run --host 0.0.0.0 --port $CKAN_PORT --threaded
+
+
+
+FROM base as prod
+USER ckan
 WORKDIR $CKAN_VENV/src/
 
 # Download extensions
@@ -110,13 +128,6 @@ RUN ckan-pip3 install -e git+https://github.com/YourOpenDAta/ckanext-yoda_theme.
     # ckan-pip3 install --upgrade --no-cache-dir -r ckanext-yoda_theme/requirements.txt
     # ckan-pip3 install --upgrade --no-cache-dir -r ckanext-yoda_theme/dev-requirements.txt
 
-
-# Configurate CKAN_PORT env
-ARG CKAN_PORT=5000
-ENV CKAN_PORT=${CKAN_PORT}
-
 ENTRYPOINT ["/ckan-entrypoint.sh"]
-
-EXPOSE ${CKAN_PORT}
 
 CMD ckan -c /etc/ckan/production.ini run --host 0.0.0.0 --port $CKAN_PORT --threaded

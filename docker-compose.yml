@@ -8,6 +8,7 @@ services:
     build:
       context: ./
       dockerfile: ckan_${CKAN_VERSION}/Dockerfile
+      target: ${CKAN_TARGET}
       args:
           - CKAN_SITE_URL=${CKAN_SITE_URL}
           - CKAN_VERSION=${CKAN_VERSION}

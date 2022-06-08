@@ -6,3 +6,6 @@ services:
   ckan:
     ports:
       - "${CKAN_PORT}:${CKAN_PORT}"
+    volumes: 
+      - ../extensions:/usr/lib/ckan/venv/src/extensions   
+  

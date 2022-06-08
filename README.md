@@ -168,6 +168,12 @@ curl -L -X POST 'http://localhost:1026/ngsi-ld/v1/subscriptions/' \
     ]
 }'
 ```
+
+Test the subscription was created
+```
+curl -L -X GET 'http://localhost:1026/ngsi-ld/v1/subscriptions/'
+```
+
 4. Run draco processors
 
 ## Architecture
