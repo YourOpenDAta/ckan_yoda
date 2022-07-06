@@ -70,7 +70,7 @@ If you make any change in the proxy you have to restart it:
 docker-compose restart proxy
 ```
 
-In development you have to modify `/etc/hosts` adding the mapping of the services to the reverse proxy:
+In development you have to modify `/etc/hosts` or `C:\Windows\System32\drivers\etc` adding the mapping of the services to the reverse proxy:
 ```
 127.0.0.1 portal-yoda.dit.upm.es
 127.0.0.1 broker-yoda.dit.upm.es
@@ -120,7 +120,7 @@ First clear the database
 Inside `db_yoda` docker container
 
 ``` 
-pg_restore --clean --if-exists -d ckan < ckan.dump
+pg_restore -U ckan --clean --if-exists -d ckan < ckan.dump
 ```
 
 ```

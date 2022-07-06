@@ -1,12 +1,12 @@
 [
     {
-        "latitud": "402706N",
+        "latitud": "402443N",
         "provincia": "MADRID",
-        "altitud": "664",
-        "indicativo": "3194U",
-        "nombre": "MADRID, CIUDAD UNIVERSITARIA",
-        "indsinop": "08220",
-        "longitud": "034327W"
+        "altitud": "667",
+        "indicativo": "3195",
+        "nombre": "MADRID, RETIRO",
+        "indsinop": "08222",
+        "longitud": "034041W"
     },
     {
         "latitud": "412326N",
@@ -72,13 +72,13 @@
         "longitud": "024412E"
     },
     {
-        "latitud": "280647N",
+        "latitud": "275504N",
         "provincia": "LAS PALMAS",
-        "altitud": "15",
-        "indicativo": "C659M",
-        "nombre": "LAS PALMAS DE GRAN CANARIA, PL. DE LA FERIA",
-        "indsinop": "60032",
-        "longitud": "152517W"
+        "altitud": "32",
+        "indicativo": "C649I",
+        "nombre": "GRAN CANARIA AEROPUERTO",
+        "indsinop": "60030",
+        "longitud": "152343W"
     },
     {
         "latitud": "431753N",
