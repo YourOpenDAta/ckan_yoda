@@ -2,3 +2,4 @@
 proxy/ssl/*
 proxy/ssl/*
 !proxy/ssl/.gitkeep
+*.nar

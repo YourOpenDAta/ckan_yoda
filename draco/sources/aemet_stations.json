@@ -1,0 +1,137 @@
+[
+    {
+        "latitud": "402706N",
+        "provincia": "MADRID",
+        "altitud": "664",
+        "indicativo": "3194U",
+        "nombre": "MADRID, CIUDAD UNIVERSITARIA",
+        "indsinop": "08220",
+        "longitud": "034327W"
+    },
+    {
+        "latitud": "412326N",
+        "provincia": "BARCELONA",
+        "altitud": "6",
+        "indicativo": "0201D",
+        "nombre": "BARCELONA",
+        "indsinop": "08180",
+        "longitud": "021200E"
+    },
+    {
+        "latitud": "392850N",
+        "provincia": "VALENCIA",
+        "altitud": "11",
+        "indicativo": "8416",
+        "nombre": "VALÈNCIA",
+        "indsinop": "08285",
+        "longitud": "002159W"
+    },
+    {
+        "latitud": "372500N",
+        "provincia": "SEVILLA",
+        "altitud": "34",
+        "indicativo": "5783",
+        "nombre": "SEVILLA AEROPUERTO",
+        "indsinop": "08391",
+        "longitud": "055245W"
+    },
+    {
+        "latitud": "413715N",
+        "provincia": "ZARAGOZA",
+        "altitud": "254",
+        "indicativo": "9434P",
+        "nombre": "ZARAGOZA, VALDESPARTERA",
+        "indsinop": "08159",
+        "longitud": "005606W"
+    },
+    {
+        "latitud": "364304N",
+        "provincia": "MALAGA",
+        "altitud": "54",
+        "indicativo": "6156X",
+        "nombre": "MÁLAGA, CENTRO METEOROLÓGICO",
+        "indsinop": "08481",
+        "longitud": "042854W"
+    },
+    {
+        "latitud": "380007N",
+        "provincia": "MURCIA",
+        "altitud": "61",
+        "indicativo": "7178I",
+        "nombre": "MURCIA",
+        "indsinop": "08430",
+        "longitud": "011015W"
+    },
+    {
+        "latitud": "393339N",
+        "provincia": "ILLES BALEARS",
+        "altitud": "8",
+        "indicativo": "B278",
+        "nombre": "PALMA DE MALLORCA, AEROPUERTO",
+        "indsinop": "08306",
+        "longitud": "024412E"
+    },
+    {
+        "latitud": "280647N",
+        "provincia": "LAS PALMAS",
+        "altitud": "15",
+        "indicativo": "C659M",
+        "nombre": "LAS PALMAS DE GRAN CANARIA, PL. DE LA FERIA",
+        "indsinop": "60032",
+        "longitud": "152517W"
+    },
+    {
+        "latitud": "431753N",
+        "provincia": "BIZKAIA",
+        "altitud": "42",
+        "indicativo": "1082",
+        "nombre": "BILBAO AEROPUERTO",
+        "indsinop": "08025",
+        "longitud": "025423W"
+    },
+    {
+        "latitud": "382221N",
+        "provincia": "ALICANTE",
+        "altitud": "81",
+        "indicativo": "8025",
+        "nombre": "ALACANT/ALICANTE",
+        "indsinop": "08359",
+        "longitud": "002939W"
+    },
+    {
+        "latitud": "375056N",
+        "provincia": "CORDOBA",
+        "altitud": "90",
+        "indicativo": "5402",
+        "nombre": "CÓRDOBA AEROPUERTO",
+        "indsinop": "08410",
+        "longitud": "045048W"
+    },
+    {
+        "latitud": "413827N",
+        "provincia": "VALLADOLID",
+        "altitud": "735",
+        "indicativo": "2422",
+        "nombre": "VALLADOLID",
+        "indsinop": "08141",
+        "longitud": "044516W"
+    },
+    {
+        "latitud": "421419N",
+        "provincia": "PONTEVEDRA",
+        "altitud": "261",
+        "indicativo": "1495",
+        "nombre": "VIGO AEROPUERTO",
+        "indsinop": "08045",
+        "longitud": "083726W"
+    },
+    {
+        "latitud": "403749N",
+        "provincia": "GUADALAJARA",
+        "altitud": "721",
+        "indicativo": "3168D",
+        "nombre": "GUADALAJARA",
+        "indsinop": "08226",
+        "longitud": "030900W"
+    }
+]
