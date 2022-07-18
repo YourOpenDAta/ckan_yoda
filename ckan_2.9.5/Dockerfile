@@ -119,12 +119,12 @@ RUN ckan-pip3 install urllib3 && \
     #ckan-pip3 install --upgrade --no-cache-dir -r ckanext-dcat/dev-requirements.txt
 
     #ckanext-dcatpapedp
-RUN  ckan-pip3 install -e git+https://github.com/YourOpenDAta/ckanext-dcatapedp.git@v1.0.0#egg=ckanext-dcatapedp && \
+RUN  ckan-pip3 install -e git+https://github.com/YourOpenDAta/ckanext-dcatapedp.git@v1.0.1#egg=ckanext-dcatapedp && \
     ckan-pip3 install --upgrade --no-cache-dir -r ckanext-dcatapedp/requirements.txt
     # ckan-pip3 install --upgrade --no-cache-dir -r ckanext-dcat/dev-requirements.txt
 
     #ckanext-yoda_theme
-RUN ckan-pip3 install -e git+https://github.com/YourOpenDAta/ckanext-yoda_theme.git@alpha#egg=ckanext-yoda_theme
+RUN ckan-pip3 install -e git+https://github.com/YourOpenDAta/ckanext-yoda_theme.git@alpha_2#egg=ckanext-yoda_theme
     # ckan-pip3 install --upgrade --no-cache-dir -r ckanext-yoda_theme/requirements.txt
     # ckan-pip3 install --upgrade --no-cache-dir -r ckanext-yoda_theme/dev-requirements.txt
 
