@@ -119,7 +119,7 @@ RUN ckan-pip3 install urllib3 && \
     #ckan-pip3 install --upgrade --no-cache-dir -r ckanext-dcat/dev-requirements.txt
 
     #ckanext-dcatpapedp
-RUN  ckan-pip3 install -e git+https://github.com/YourOpenDAta/ckanext-dcatapedp.git@v1.0.1#egg=ckanext-dcatapedp && \
+RUN  ckan-pip3 install -e git+https://github.com/YourOpenDAta/ckanext-dcatapedp.git@v1.0.2#egg=ckanext-dcatapedp && \
     ckan-pip3 install --upgrade --no-cache-dir -r ckanext-dcatapedp/requirements.txt
     # ckan-pip3 install --upgrade --no-cache-dir -r ckanext-dcat/dev-requirements.txt
 
